@@ -554,10 +554,18 @@
             <p>Bringing digital characters to life through animation</p>
             
             <div class="social-links">
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/emloxa0000/" target="_blank" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://github.com/Emloxa" target="_blank" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.youtube.com/@Emloxa" target="_blank" title="YouTube">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="https://x.com/emloxa0000" target="_blank" title="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
             </div>
             
             <p class="copyright">&copy; 2025 Emloxa. All rights reserved.</p>
@@ -628,6 +636,15 @@
                 const gifImg = this.querySelector('.gif-img');
                 gifImg.style.transform = 'scale(1)';
             });
+        });
+        
+        // Update year automatically
+        document.addEventListener('DOMContentLoaded', function() {
+            const yearElement = document.querySelector('.copyright');
+            if(yearElement) {
+                const currentYear = new Date().getFullYear();
+                yearElement.innerHTML = yearElement.innerHTML.replace('2025', currentYear);
+            }
         });
     </script>
 </body>
