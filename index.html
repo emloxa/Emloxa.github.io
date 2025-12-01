@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emloxa | GIF Artist & Animator</title>
+    <title>🎨 E • M • L • O • X • A | GIF Artist Portfolio</title>
+    <link rel="icon" href="Logo.jpg" type="image/jpeg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
     <style>
@@ -66,6 +67,20 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .logo-letter {
+            display: inline-block;
+            animation: letterFloat 3s ease-in-out infinite;
+            animation-delay: calc(var(--i) * 0.1s);
+        }
+        
+        @keyframes letterFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
         }
         
         .nav-links {
@@ -107,12 +122,44 @@
             cursor: pointer;
         }
         
+        /* Logo Controls */
+        .logo-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-left: 20px;
+        }
+        
+        .logo-btn {
+            background: rgba(255, 101, 132, 0.2);
+            border: 2px solid var(--secondary);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+        
+        .logo-btn:hover {
+            background: var(--secondary);
+            transform: scale(1.1);
+        }
+        
+        .logo-btn.active {
+            background: var(--secondary);
+            box-shadow: 0 0 10px rgba(255, 101, 132, 0.5);
+        }
+        
         /* Music Controls */
         .music-controls {
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-left: 20px;
         }
         
         .music-btn {
@@ -215,6 +262,12 @@
             background: var(--gradient) border-box;
             box-shadow: 0 20px 40px rgba(108, 99, 255, 0.3);
             margin-bottom: 30px;
+            animation: profileGlow 4s ease-in-out infinite;
+        }
+        
+        @keyframes profileGlow {
+            0%, 100% { box-shadow: 0 20px 40px rgba(108, 99, 255, 0.3); }
+            50% { box-shadow: 0 20px 60px rgba(108, 99, 255, 0.6); }
         }
         
         .hero h1 {
@@ -226,11 +279,59 @@
             -webkit-text-fill-color: transparent;
         }
         
+        .title-animation {
+            overflow: hidden;
+            height: 60px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .title-text {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .title-letter {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: letterReveal 1.5s forwards ease;
+            animation-delay: calc(var(--i) * 0.1s);
+            font-size: 48px;
+            font-weight: 900;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        @keyframes letterReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) rotate(15deg);
+            }
+            60% {
+                opacity: 1;
+                transform: translateY(-5px) rotate(-5deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) rotate(0);
+            }
+        }
+        
         .hero p {
             font-size: 20px;
             color: var(--gray);
             max-width: 600px;
             margin: 0 auto 30px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards 1.5s;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .btn {
@@ -245,10 +346,13 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 10px 20px rgba(108, 99, 255, 0.3);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards 2s;
         }
         
         .btn:hover {
-            transform: translateY(-3px);
+            transform: translateY(-3px) scale(1.05);
             box-shadow: 0 15px 30px rgba(108, 99, 255, 0.4);
         }
         
@@ -275,6 +379,12 @@
             height: 4px;
             background: var(--gradient);
             border-radius: 2px;
+            animation: lineGrow 2s ease-out;
+        }
+        
+        @keyframes lineGrow {
+            from { width: 0; }
+            to { width: 80px; }
         }
         
         /* GIF Portfolio */
@@ -291,6 +401,13 @@
             overflow: hidden;
             transition: all 0.3s ease;
             border: 1px solid rgba(108, 99, 255, 0.1);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .gif-card.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .gif-card:hover {
@@ -326,6 +443,14 @@
             grid-template-columns: 1fr 1fr;
             gap: 60px;
             align-items: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .about-content.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .about-text h3 {
@@ -352,6 +477,13 @@
             border-radius: 50px;
             font-size: 14px;
             border: 1px solid rgba(108, 99, 255, 0.3);
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        
+        .skill.visible {
+            opacity: 1;
+            transform: scale(1);
         }
         
         .experience {
@@ -359,10 +491,24 @@
             padding: 25px;
             border-radius: 20px;
             border-left: 4px solid var(--secondary);
+            opacity: 0;
+            transform: translateX(30px);
+        }
+        
+        .experience.visible {
+            opacity: 1;
+            transform: translateX(0);
         }
         
         .exp-item {
             margin-bottom: 25px;
+            opacity: 0;
+            transform: translateX(20px);
+        }
+        
+        .exp-item.visible {
+            opacity: 1;
+            transform: translateX(0);
         }
         
         .exp-item h4 {
@@ -390,10 +536,18 @@
             background: rgba(255, 255, 255, 0.05);
             border-radius: 15px;
             transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .contact-item.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .contact-item:hover {
             background: rgba(108, 99, 255, 0.1);
+            transform: translateY(-5px);
         }
         
         .contact-icon {
@@ -430,11 +584,18 @@
             color: white;
             font-size: 20px;
             transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .social-links a.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .social-links a:hover {
             background: var(--gradient);
-            transform: translateY(-5px);
+            transform: translateY(-5px) scale(1.1);
         }
         
         .copyright {
@@ -454,6 +615,7 @@
                 background: rgba(26, 26, 46, 0.98);
                 padding: 20px;
                 gap: 20px;
+                align-items: flex-start;
             }
             
             .nav-links.show {
@@ -465,6 +627,10 @@
             }
             
             .hero h1 {
+                font-size: 36px;
+            }
+            
+            .title-letter {
                 font-size: 36px;
             }
             
@@ -480,14 +646,17 @@
                 padding: 70px 0;
             }
             
-            .music-controls {
+            .music-controls, .logo-controls {
                 margin-left: 0;
                 margin-top: 15px;
-                justify-content: center;
             }
             
             .volume-slider {
                 width: 80px;
+            }
+            
+            .logo {
+                font-size: 24px;
             }
         }
     </style>
@@ -503,7 +672,14 @@
     <header>
         <div class="container">
             <nav>
-                <a href="#" class="logo">EMLOXA PROJECTS</a>
+                <a href="#" class="logo">
+                    <span class="logo-letter" style="--i:0">E</span>
+                    <span class="logo-letter" style="--i:1">M</span>
+                    <span class="logo-letter" style="--i:2">L</span>
+                    <span class="logo-letter" style="--i:3">O</span>
+                    <span class="logo-letter" style="--i:4">X</span>
+                    <span class="logo-letter" style="--i:5">A</span>
+                </a>
                 <div class="mobile-menu">
                     <i class="fas fa-bars"></i>
                 </div>
@@ -513,15 +689,22 @@
                     <a href="#about">About</a>
                     <a href="#contact">Contact</a>
                     
+                    <!-- Logo Controls -->
+                    <div class="logo-controls">
+                        <button class="logo-btn" id="logoAnimBtn" title="Toggle Logo Animation">
+                            <i class="fas fa-play"></i>
+                        </button>
+                    </div>
+                    
                     <!-- Music Controls -->
                     <div class="music-controls">
                         <button class="music-btn" id="playBtn" title="Play/Pause Music">
-                            <i class="fas fa-play"></i>
+                            <i class="fas fa-pause"></i>
                         </button>
                         <button class="music-btn" id="volumeBtn" title="Volume Control">
                             <i class="fas fa-volume-up"></i>
                         </button>
-                        <input type="range" min="0" max="1" step="0.1" value="0.5" class="volume-slider" id="volumeSlider">
+                        <input type="range" min="0" max="1" step="0.1" value="0.3" class="volume-slider" id="volumeSlider">
                     </div>
                 </div>
             </nav>
@@ -529,14 +712,25 @@
     </header>
 
     <!-- Music Info Toast -->
-    <div class="music-info" id="musicInfo">Music: Playing</div>
+    <div class="music-info" id="musicInfo">Music: Playing at 30% volume</div>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-bg"></div>
         <div class="container">
             <img src="https://media.giphy.com/avatars/Emloxa/gQngaIiqFIor/200h.jpg" alt="Emloxa" class="profile-img">
-            <h1>Emloxa</h1>
+            <div class="title-animation">
+                <h1>
+                    <div class="title-text">
+                        <span class="title-letter" style="--i:0">E</span>
+                        <span class="title-letter" style="--i:1">M</span>
+                        <span class="title-letter" style="--i:2">L</span>
+                        <span class="title-letter" style="--i:3">O</span>
+                        <span class="title-letter" style="--i:4">X</span>
+                        <span class="title-letter" style="--i:5">A</span>
+                    </div>
+                </h1>
+            </div>
             <p>GIF Artist & Digital Animator | Creating expressive animations for social media and digital platforms</p>
             <a href="#portfolio" class="btn">View My Work</a>
         </div>
@@ -612,7 +806,7 @@
                 
                 <!-- NEW GIF 8 -->
                 <div class="gif-card">
-                    <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjJidmszZDgzaGVjcHgwZmhidWJsaDU3ZGpnZzQ1YXB1ZWc5ZWR3NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/pH4ipGn9TZAuEZTv0q/giphy.gif" alt="Angry Goku" class="gif-img">
+                    <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjJidmszZDgzaGVjcHgwZmhidWJsaDU3ZGpnZzQ1YXB1ZWc9ZWR3NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/pH4ipGn9TZAuEZTv0q/giphy.gif" alt="Angry Goku" class="gif-img">
                     <div class="gif-info">
                         <h3 class="gif-title">Angry Goku</h3>
                         <p class="gif-desc">Dragon Ball's Goku in super saiyan angry mode. Perfect for gaming and anime reaction moments.</p>
@@ -701,7 +895,14 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <a href="#" class="logo">EMLOXA</a>
+            <div class="logo">
+                <span class="logo-letter" style="--i:0">E</span>
+                <span class="logo-letter" style="--i:1">M</span>
+                <span class="logo-letter" style="--i:2">L</span>
+                <span class="logo-letter" style="--i:3">O</span>
+                <span class="logo-letter" style="--i:4">X</span>
+                <span class="logo-letter" style="--i:5">A</span>
+            </div>
             <p>Bringing digital characters to life through animation</p>
             
             <div class="social-links">
@@ -719,7 +920,7 @@
                 </a>
             </div>
             
-            <p class="copyright">&copy; 2025 Emloxa. All rights reserved. | <span id="musicStatus">Music: ON</span></p>
+            <p class="copyright">&copy; <span id="currentYear"></span> Emloxa. All rights reserved. | <span id="musicStatus">Music: ON • Logo Animation: ON</span></p>
         </div>
     </footer>
 
@@ -731,19 +932,43 @@
         const volumeSlider = document.getElementById('volumeSlider');
         const musicInfo = document.getElementById('musicInfo');
         const musicStatus = document.getElementById('musicStatus');
+        const logoAnimBtn = document.getElementById('logoAnimBtn');
+        const logoLetters = document.querySelectorAll('.logo-letter');
+        const currentYearSpan = document.getElementById('currentYear');
         
-        // Set initial volume
-        audio.volume = 0.5;
+        // Set initial volume to 30%
+        audio.volume = 0.3;
+        volumeSlider.value = 0.3;
         
-        // Auto-play music on page load (with user interaction requirement)
+        // Logo animation state
+        let logoAnimationEnabled = true;
+        
+        // Set current year
+        currentYearSpan.textContent = new Date().getFullYear();
+        
+        // Initialize music on page load
         document.addEventListener('DOMContentLoaded', function() {
-            // Try to play music after a short delay
-            setTimeout(() => {
-                audio.play().catch(e => {
-                    console.log("Autoplay prevented. Click play button to start music.");
-                    showMusicInfo("Click play button to start music");
-                });
-            }, 1000);
+            // Start music automatically at 30% volume
+            audio.play().then(() => {
+                console.log("Music started automatically at 30% volume");
+                showMusicInfo("Music: Playing at 30% volume");
+                
+                // Update play button to pause state
+                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                playBtn.classList.add('active');
+                
+                // Update volume button icon
+                volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+                volumeBtn.classList.add('active');
+                
+                // Update music status
+                if (musicStatus) musicStatus.textContent = "Music: ON • Logo Animation: ON";
+            }).catch(e => {
+                console.log("Autoplay prevented. User interaction required.");
+                showMusicInfo("Click play button to start music");
+                playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                playBtn.classList.remove('active');
+            });
         });
         
         // Play/Pause button
@@ -752,14 +977,14 @@
                 audio.play();
                 playBtn.innerHTML = '<i class="fas fa-pause"></i>';
                 playBtn.classList.add('active');
-                showMusicInfo("Music: Playing");
-                if (musicStatus) musicStatus.textContent = "Music: ON";
+                showMusicInfo("Music: Playing at " + Math.round(audio.volume * 100) + "% volume");
+                updateMusicStatus();
             } else {
                 audio.pause();
                 playBtn.innerHTML = '<i class="fas fa-play"></i>';
                 playBtn.classList.remove('active');
                 showMusicInfo("Music: Paused");
-                if (musicStatus) musicStatus.textContent = "Music: OFF";
+                updateMusicStatus();
             }
         });
         
@@ -790,7 +1015,42 @@
             }
             
             showMusicInfo("Volume: " + Math.round(audio.volume * 100) + "%");
+            updateMusicStatus();
         });
+        
+        // Logo animation toggle
+        logoAnimBtn.addEventListener('click', function() {
+            logoAnimationEnabled = !logoAnimationEnabled;
+            
+            if (logoAnimationEnabled) {
+                // Enable animation
+                logoLetters.forEach(letter => {
+                    letter.style.animationPlayState = 'running';
+                });
+                logoAnimBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                logoAnimBtn.classList.add('active');
+                showMusicInfo("Logo Animation: ON");
+            } else {
+                // Disable animation
+                logoLetters.forEach(letter => {
+                    letter.style.animationPlayState = 'paused';
+                });
+                logoAnimBtn.innerHTML = '<i class="fas fa-play"></i>';
+                logoAnimBtn.classList.remove('active');
+                showMusicInfo("Logo Animation: OFF");
+            }
+            
+            updateMusicStatus();
+        });
+        
+        // Update music status text
+        function updateMusicStatus() {
+            if (!musicStatus) return;
+            
+            const musicState = audio.paused ? "OFF" : "ON";
+            const logoState = logoAnimationEnabled ? "ON" : "OFF";
+            musicStatus.textContent = `Music: ${musicState} • Logo Animation: ${logoState}`;
+        }
         
         // Show music info toast
         function showMusicInfo(text) {
@@ -831,27 +1091,66 @@
             });
         });
         
-        // Animation on scroll
+        // Intersection Observer for animations
         const observerOptions = {
-            threshold: 0.1
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
         };
         
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if(entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Special handling for skills
+                    if (entry.target.classList.contains('skills')) {
+                        const skills = entry.target.querySelectorAll('.skill');
+                        skills.forEach((skill, index) => {
+                            setTimeout(() => {
+                                skill.classList.add('visible');
+                            }, index * 100);
+                        });
+                    }
+                    
+                    // Special handling for experience items
+                    if (entry.target.classList.contains('experience')) {
+                        const expItems = entry.target.querySelectorAll('.exp-item');
+                        expItems.forEach((item, index) => {
+                            setTimeout(() => {
+                                item.classList.add('visible');
+                            }, index * 200);
+                        });
+                    }
+                    
+                    // Special handling for social links
+                    if (entry.target.classList.contains('social-links')) {
+                        const links = entry.target.querySelectorAll('a');
+                        links.forEach((link, index) => {
+                            setTimeout(() => {
+                                link.classList.add('visible');
+                            }, index * 150);
+                        });
+                    }
                 }
             });
         }, observerOptions);
         
         // Observe elements for animation
-        document.querySelectorAll('.gif-card, .about-text, .experience').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'all 0.6s ease';
+        document.querySelectorAll('.gif-card, .about-content, .contact-item').forEach(el => {
             observer.observe(el);
         });
+        
+        // Observe skills container
+        const skillsContainer = document.querySelector('.skills');
+        if (skillsContainer) observer.observe(skillsContainer);
+        
+        // Observe experience container
+        const experienceContainer = document.querySelector('.experience');
+        if (experienceContainer) observer.observe(experienceContainer);
+        
+        // Observe social links
+        const socialLinks = document.querySelector('.social-links');
+        if (socialLinks) observer.observe(socialLinks);
         
         // Add hover effect to GIF cards
         document.querySelectorAll('.gif-card').forEach(card => {
@@ -867,21 +1166,6 @@
             });
         });
         
-        // Update year automatically
-        document.addEventListener('DOMContentLoaded', function() {
-            const yearElement = document.querySelector('.copyright');
-            if(yearElement) {
-                const currentYear = new Date().getFullYear();
-                yearElement.innerHTML = yearElement.innerHTML.replace('2025', currentYear);
-            }
-            
-            // Initialize play button state
-            if (!audio.paused) {
-                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                playBtn.classList.add('active');
-            }
-        });
-        
         // Close volume slider when clicking outside
         document.addEventListener('click', function(event) {
             if (!volumeBtn.contains(event.target) && !volumeSlider.contains(event.target)) {
@@ -889,6 +1173,10 @@
                 volumeVisible = false;
             }
         });
+        
+        // Initialize logo button state
+        logoAnimBtn.innerHTML = '<i class="fas fa-pause"></i>';
+        logoAnimBtn.classList.add('active');
     </script>
 </body>
 </html>
