@@ -70,6 +70,7 @@
         
         .nav-links {
             display: flex;
+            align-items: center;
             gap: 40px;
         }
         
@@ -104,6 +105,87 @@
             display: none;
             font-size: 24px;
             cursor: pointer;
+        }
+        
+        /* Music Controls */
+        .music-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-left: 20px;
+        }
+        
+        .music-btn {
+            background: rgba(108, 99, 255, 0.2);
+            border: 2px solid var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 18px;
+        }
+        
+        .music-btn:hover {
+            background: var(--primary);
+            transform: scale(1.1);
+        }
+        
+        .music-btn.active {
+            background: var(--primary);
+            box-shadow: 0 0 15px rgba(108, 99, 255, 0.5);
+        }
+        
+        .volume-slider {
+            width: 100px;
+            height: 6px;
+            -webkit-appearance: none;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            outline: none;
+            opacity: 0;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: all 0.3s ease;
+        }
+        
+        .volume-slider.show {
+            opacity: 1;
+            transform: scaleX(1);
+        }
+        
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            border: 2px solid white;
+        }
+        
+        .music-info {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(26, 26, 46, 0.9);
+            padding: 10px 15px;
+            border-radius: 25px;
+            font-size: 14px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border: 1px solid rgba(108, 99, 255, 0.3);
+        }
+        
+        .music-info.show {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         /* Hero Section */
@@ -364,6 +446,18 @@
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(26, 26, 46, 0.98);
+                padding: 20px;
+                gap: 20px;
+            }
+            
+            .nav-links.show {
+                display: flex;
             }
             
             .mobile-menu {
@@ -385,27 +479,57 @@
             section {
                 padding: 70px 0;
             }
+            
+            .music-controls {
+                margin-left: 0;
+                margin-top: 15px;
+                justify-content: center;
+            }
+            
+            .volume-slider {
+                width: 80px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Audio Element -->
+    <audio id="bg-music" loop>
+        <source src="ses.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
     <!-- Header -->
     <header>
         <div class="container">
             <nav>
                 <a href="#" class="logo">EMLOXA PROJECTS</a>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
                 <div class="nav-links">
                     <a href="#home">Home</a>
                     <a href="#portfolio">Portfolio</a>
                     <a href="#about">About</a>
                     <a href="#contact">Contact</a>
-                </div>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
+                    
+                    <!-- Music Controls -->
+                    <div class="music-controls">
+                        <button class="music-btn" id="playBtn" title="Play/Pause Music">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button class="music-btn" id="volumeBtn" title="Volume Control">
+                            <i class="fas fa-volume-up"></i>
+                        </button>
+                        <input type="range" min="0" max="1" step="0.1" value="0.5" class="volume-slider" id="volumeSlider">
+                    </div>
                 </div>
             </nav>
         </div>
     </header>
+
+    <!-- Music Info Toast -->
+    <div class="music-info" id="musicInfo">Music: Playing</div>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
@@ -465,6 +589,33 @@
                     <div class="gif-info">
                         <h3 class="gif-title">Rr Shocked</h3>
                         <p class="gif-desc">Reaction animation perfect for surprised or shocked moments. Widely used in meme culture.</p>
+                    </div>
+                </div>
+                
+                <!-- NEW GIF 6 -->
+                <div class="gif-card">
+                    <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmF4b2hzZ21iYXFmb3MxdjB3Z3NvOWFwbnRtczBrY2hoaGNocDdycSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/OpL4mNa6ZrWrGcIpLy/giphy.gif" alt="Angry Miku" class="gif-img">
+                    <div class="gif-info">
+                        <h3 class="gif-title">Angry Miku</h3>
+                        <p class="gif-desc">Vocaloid character Miku in an angry expression. Perfect for anime and music community reactions.</p>
+                    </div>
+                </div>
+                
+                <!-- NEW GIF 7 -->
+                <div class="gif-card">
+                    <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExc2s3ZXV6MXg2ZXJoeXVzbDBlMzk3anhtOTNpMDl1NWFoYW1lbGFtayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/oyAXfuLM41i49vX38H/giphy.gif" alt="Enes Batur" class="gif-img">
+                    <div class="gif-info">
+                        <h3 class="gif-title">Enes Batur</h3>
+                        <p class="gif-desc">Popular Turkish YouTuber reaction GIF. Widely used in Turkish social media communities.</p>
+                    </div>
+                </div>
+                
+                <!-- NEW GIF 8 -->
+                <div class="gif-card">
+                    <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjJidmszZDgzaGVjcHgwZmhidWJsaDU3ZGpnZzQ1YXB1ZWc5ZWR3NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/pH4ipGn9TZAuEZTv0q/giphy.gif" alt="Angry Goku" class="gif-img">
+                    <div class="gif-info">
+                        <h3 class="gif-title">Angry Goku</h3>
+                        <p class="gif-desc">Dragon Ball's Goku in super saiyan angry mode. Perfect for gaming and anime reaction moments.</p>
                     </div>
                 </div>
             </div>
@@ -568,15 +719,93 @@
                 </a>
             </div>
             
-            <p class="copyright">&copy; 2025 Emloxa. All rights reserved.</p>
+            <p class="copyright">&copy; 2025 Emloxa. All rights reserved. | <span id="musicStatus">Music: ON</span></p>
         </div>
     </footer>
 
     <script>
+        // Audio Elements
+        const audio = document.getElementById('bg-music');
+        const playBtn = document.getElementById('playBtn');
+        const volumeBtn = document.getElementById('volumeBtn');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const musicInfo = document.getElementById('musicInfo');
+        const musicStatus = document.getElementById('musicStatus');
+        
+        // Set initial volume
+        audio.volume = 0.5;
+        
+        // Auto-play music on page load (with user interaction requirement)
+        document.addEventListener('DOMContentLoaded', function() {
+            // Try to play music after a short delay
+            setTimeout(() => {
+                audio.play().catch(e => {
+                    console.log("Autoplay prevented. Click play button to start music.");
+                    showMusicInfo("Click play button to start music");
+                });
+            }, 1000);
+        });
+        
+        // Play/Pause button
+        playBtn.addEventListener('click', function() {
+            if (audio.paused) {
+                audio.play();
+                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                playBtn.classList.add('active');
+                showMusicInfo("Music: Playing");
+                if (musicStatus) musicStatus.textContent = "Music: ON";
+            } else {
+                audio.pause();
+                playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                playBtn.classList.remove('active');
+                showMusicInfo("Music: Paused");
+                if (musicStatus) musicStatus.textContent = "Music: OFF";
+            }
+        });
+        
+        // Volume button to show/hide slider
+        let volumeVisible = false;
+        volumeBtn.addEventListener('click', function() {
+            volumeVisible = !volumeVisible;
+            if (volumeVisible) {
+                volumeSlider.classList.add('show');
+                showMusicInfo("Volume: " + Math.round(audio.volume * 100) + "%");
+            } else {
+                volumeSlider.classList.remove('show');
+            }
+        });
+        
+        // Volume slider
+        volumeSlider.addEventListener('input', function() {
+            audio.volume = this.value;
+            volumeBtn.classList.toggle('active', audio.volume > 0);
+            
+            // Update volume button icon
+            if (audio.volume == 0) {
+                volumeBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+            } else if (audio.volume < 0.5) {
+                volumeBtn.innerHTML = '<i class="fas fa-volume-down"></i>';
+            } else {
+                volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+            }
+            
+            showMusicInfo("Volume: " + Math.round(audio.volume * 100) + "%");
+        });
+        
+        // Show music info toast
+        function showMusicInfo(text) {
+            musicInfo.textContent = text;
+            musicInfo.classList.add('show');
+            
+            setTimeout(() => {
+                musicInfo.classList.remove('show');
+            }, 2000);
+        }
+        
         // Mobile Menu Toggle
         document.querySelector('.mobile-menu').addEventListener('click', function() {
             const navLinks = document.querySelector('.nav-links');
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            navLinks.classList.toggle('show');
         });
         
         // Smooth scrolling for anchor links
@@ -596,7 +825,7 @@
                     
                     // Close mobile menu if open
                     if(window.innerWidth <= 768) {
-                        document.querySelector('.nav-links').style.display = 'none';
+                        document.querySelector('.nav-links').classList.remove('show');
                     }
                 }
             });
@@ -644,6 +873,20 @@
             if(yearElement) {
                 const currentYear = new Date().getFullYear();
                 yearElement.innerHTML = yearElement.innerHTML.replace('2025', currentYear);
+            }
+            
+            // Initialize play button state
+            if (!audio.paused) {
+                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                playBtn.classList.add('active');
+            }
+        });
+        
+        // Close volume slider when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!volumeBtn.contains(event.target) && !volumeSlider.contains(event.target)) {
+                volumeSlider.classList.remove('show');
+                volumeVisible = false;
             }
         });
     </script>
