@@ -140,10 +140,6 @@
             box-shadow: 0 0 15px rgba(108, 99, 255, 0.5);
         }
         
-        .volume-controls {
-            position: relative;
-        }
-        
         .volume-slider {
             width: 100px;
             height: 6px;
@@ -155,15 +151,11 @@
             transform: scaleX(0);
             transform-origin: left;
             transition: all 0.3s ease;
-            position: absolute;
-            top: -25px;
-            left: 50%;
-            transform: translateX(-50%) scaleX(0);
         }
         
         .volume-slider.show {
             opacity: 1;
-            transform: translateX(-50%) scaleX(1);
+            transform: scaleX(1);
         }
         
         .volume-slider::-webkit-slider-thumb {
@@ -174,31 +166,6 @@
             background: var(--primary);
             cursor: pointer;
             border: 2px solid white;
-            transition: all 0.2s;
-        }
-        
-        .volume-slider::-webkit-slider-thumb:hover {
-            transform: scale(1.2);
-        }
-        
-        .volume-percentage {
-            position: absolute;
-            top: -40px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(26, 26, 46, 0.9);
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 11px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-            white-space: nowrap;
-            border: 1px solid rgba(108, 99, 255, 0.3);
-        }
-        
-        .volume-slider.show + .volume-percentage {
-            opacity: 1;
         }
         
         /* Music Status */
@@ -217,7 +184,6 @@
             border: 1px solid rgba(108, 99, 255, 0.3);
             opacity: 0.7;
             transition: opacity 0.3s;
-            cursor: pointer;
         }
         
         .music-status:hover {
@@ -685,11 +651,6 @@
             
             .volume-slider {
                 width: 80px;
-                top: -35px;
-            }
-            
-            .volume-percentage {
-                top: -50px;
             }
             
             .logo {
@@ -730,7 +691,7 @@
     </div>
 
     <!-- Music Status Indicator -->
-    <div class="music-status" id="musicStatus" title="Click to toggle music">
+    <div class="music-status" id="musicStatus">
         <i class="fas fa-volume-up"></i>
         <span id="statusText">Music: 30%</span>
     </div>
@@ -754,13 +715,10 @@
                         <button class="music-btn" id="playBtn" title="Play/Pause Music">
                             <i class="fas fa-pause"></i>
                         </button>
-                        <div class="volume-controls">
-                            <button class="music-btn" id="volumeBtn" title="Volume Control">
-                                <i class="fas fa-volume-up"></i>
-                            </button>
-                            <input type="range" min="0" max="1" step="0.01" value="0.3" class="volume-slider" id="volumeSlider">
-                            <div class="volume-percentage" id="volumePercentage">30%</div>
-                        </div>
+                        <button class="music-btn" id="volumeBtn" title="Volume Control">
+                            <i class="fas fa-volume-up"></i>
+                        </button>
+                        <input type="range" min="0" max="1" step="0.1" value="0.3" class="volume-slider" id="volumeSlider">
                     </div>
                 </div>
             </nav>
@@ -819,15 +777,15 @@
                 
                 <!-- GIF 3 -->
                 <div class="gif-card">
-                    <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjA4OHc1Zjh6am83MWo3Y2c1cjIzeTZwdnR5cnFwZHA0bjUzN3UxdSZlcD12MV9pbnRlcm5albF9naWZfYnlfaWQmY3Q9Zw/UIw3YY0wPV8Vll4R6i/giphy.gif" alt="Disco Kid" class="gif-img">
+                    <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjA4OHc1Zjh6am83MWo3Y2c1cjIzeTZwdnR5cnFwZHA0bjUzN3UxdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/UIw3YY0wPV8Vll4R6i/giphy.gif" alt="Disco Kid" class="gif-img">
                     <div class="gif-info">
                         <h3 class="gif-title">Disco Kid</h3>
                         <p class="gif-desc">Energetic dance animation with retro disco vibes. Popular in music and entertainment communities.</p>
                         <div class="gif-actions">
-                            <button class="gif-action-btn copy" data-url="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjA4OHc1Zjh6am83MWo3Y2c1cjIzeTZwdnR5cnFwZHA0bjUzN3UxdSZlcD12MV9pbnRlcm5albF9naWZfYnlfaWQmY3Q9Zw/UIw3YY0wPV8Vll4R6i/giphy.gif">
+                            <button class="gif-action-btn copy" data-url="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjA4OHc1Zjh6am83MWo3Y2c1cjIzeTZwdnR5cnFwZHA0bjUzN3UxdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/UIw3YY0wPV8Vll4R6i/giphy.gif">
                                 <i class="far fa-copy"></i> Copy Link
                             </button>
-                            <button class="gif-action-btn open" data-url="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjA4OHc1Zjh6am83MWo3Y2c1cjIzeTZwdnR5cnFwZHA0bjUzN3UxdSZlcD12MV9pbnRlcm5albF9naWZfYnlfaWQmY3Q9Zw/UIw3YY0wPV8Vll4R6i/giphy.gif">
+                            <button class="gif-action-btn open" data-url="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjA4OHc1Zjh6am83MWo3Y2c1cjIzeTZwdnR5cnFwZHA0bjUzN3UxdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/UIw3YY0wPV8Vll4R6i/giphy.gif">
                                 <i class="fas fa-external-link-alt"></i> Open GIF
                             </button>
                         </div>
@@ -853,7 +811,7 @@
                 
                 <!-- GIF 5 -->
                 <div class="gif-card">
-                    <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExendoYjZsYmN3dmJhdXh1dnVjdHB2aITd3MDZtbHdjNmFzczZsdGRmcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/FOjd5OwhVKlAMgPGcY/giphy.gif" alt="Rr Şaşırma" class="gif-img">
+                    <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExendoYjZsYmN3dmJhdXh1dnVjdHB2aTd3MDZtbHdjNmFzczZsdGRmcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/FOjd5OwhVKlAMgPGcY/giphy.gif" alt="Rr Şaşırma" class="gif-img">
                     <div class="gif-info">
                         <h3 class="gif-title">Rr Shocked</h3>
                         <p class="gif-desc">Reaction animation perfect for surprised or shocked moments. Widely used in meme culture.</p>
@@ -904,7 +862,7 @@
                 
                 <!-- GIF 8 -->
                 <div class="gif-card">
-                    <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjJidmszZDgzaGVjcHgwZmhidWJsaDU7ZGpnZzQ1YXB1ZWc9ZWR3NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/pH4ipGn9TZAuEZTv0q/giphy.gif" alt="Angry Goku" class="gif-img">
+                    <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjJidmszZDgzaGVjcHgwZmhidWJsaDU3ZGpnZzQ1YXB1ZWc9ZWR3NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/pH4ipGn9TZAuEZTv0q/giphy.gif" alt="Angry Goku" class="gif-img">
                     <div class="gif-info">
                         <h3 class="gif-title">Angry Goku</h3>
                         <p class="gif-desc">Dragon Ball's Goku in super saiyan angry mode. Perfect for gaming and anime reaction moments.</p>
@@ -1029,7 +987,6 @@
         const playBtn = document.getElementById('playBtn');
         const volumeBtn = document.getElementById('volumeBtn');
         const volumeSlider = document.getElementById('volumeSlider');
-        const volumePercentage = document.getElementById('volumePercentage');
         const musicStatus = document.getElementById('musicStatus');
         const statusText = document.getElementById('statusText');
         const currentYearSpan = document.getElementById('currentYear');
@@ -1037,50 +994,32 @@
         const toastText = document.getElementById('toastText');
         
         // Set initial volume to 30%
-        let currentVolume = 0.3;
-        audio.volume = currentVolume;
-        volumeSlider.value = currentVolume;
-        volumePercentage.textContent = `${Math.round(currentVolume * 100)}%`;
+        audio.volume = 0.3;
+        volumeSlider.value = 0.3;
         
         // Set current year
         currentYearSpan.textContent = new Date().getFullYear();
         
-        // Update volume display
-        function updateVolumeDisplay(volume) {
-            const percentage = Math.round(volume * 100);
-            volumePercentage.textContent = `${percentage}%`;
-            statusText.textContent = `Music: ${percentage}%`;
-            
-            // Update volume button icon
-            if (volume == 0) {
-                volumeBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
-            } else if (volume < 0.5) {
-                volumeBtn.innerHTML = '<i class="fas fa-volume-down"></i>';
-            } else {
-                volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
-            }
-        }
-        
         // Initialize music on page load - AUTOPLAY ENABLED
         document.addEventListener('DOMContentLoaded', function() {
-            // Update initial display
-            updateVolumeDisplay(currentVolume);
-            
             // Try to play music automatically at 30% volume
             const playPromise = audio.play();
             
             if (playPromise !== undefined) {
                 playPromise.then(() => {
                     console.log("Music started automatically at 30% volume");
+                    statusText.textContent = "Music: 30%";
                     
                     // Update play button to pause state
                     playBtn.innerHTML = '<i class="fas fa-pause"></i>';
                     playBtn.classList.add('active');
-                    volumeBtn.classList.add('active');
                     
-                    showToast("Music started at 30% volume");
+                    // Update volume button icon
+                    volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+                    volumeBtn.classList.add('active');
                 }).catch(error => {
                     console.log("Autoplay prevented:", error);
+                    statusText.textContent = "Click play button";
                     playBtn.innerHTML = '<i class="fas fa-play"></i>';
                     playBtn.classList.remove('active');
                     
@@ -1108,34 +1047,20 @@
                 audio.play();
                 playBtn.innerHTML = '<i class="fas fa-pause"></i>';
                 playBtn.classList.add('active');
-                showToast(`Music started at ${Math.round(audio.volume * 100)}% volume`);
+                statusText.textContent = `Music: ${Math.round(audio.volume * 100)}%`;
+                showToast("Music started");
             } else {
                 audio.pause();
                 playBtn.innerHTML = '<i class="fas fa-play"></i>';
                 playBtn.classList.remove('active');
-                showToast("Music paused");
-            }
-        });
-        
-        // Music status click to toggle play/pause
-        musicStatus.addEventListener('click', function() {
-            if (audio.paused) {
-                audio.play();
-                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                playBtn.classList.add('active');
-                showToast(`Music started at ${Math.round(audio.volume * 100)}% volume`);
-            } else {
-                audio.pause();
-                playBtn.innerHTML = '<i class="fas fa-play"></i>';
-                playBtn.classList.remove('active');
+                statusText.textContent = "Music: Paused";
                 showToast("Music paused");
             }
         });
         
         // Volume button to show/hide slider
         let volumeVisible = false;
-        volumeBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
+        volumeBtn.addEventListener('click', function() {
             volumeVisible = !volumeVisible;
             if (volumeVisible) {
                 volumeSlider.classList.add('show');
@@ -1144,27 +1069,22 @@
             }
         });
         
-        // Volume slider interaction
+        // Volume slider
         volumeSlider.addEventListener('input', function() {
-            currentVolume = parseFloat(this.value);
-            audio.volume = currentVolume;
-            updateVolumeDisplay(currentVolume);
-            volumeBtn.classList.toggle('active', currentVolume > 0);
+            audio.volume = this.value;
+            volumeBtn.classList.toggle('active', audio.volume > 0);
             
-            // If music was muted and volume increased, auto-play
-            if (audio.paused && currentVolume > 0) {
-                audio.play();
-                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                playBtn.classList.add('active');
+            // Update volume button icon
+            if (audio.volume == 0) {
+                volumeBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                statusText.textContent = "Music: Muted";
+            } else if (audio.volume < 0.5) {
+                volumeBtn.innerHTML = '<i class="fas fa-volume-down"></i>';
+                statusText.textContent = `Music: ${Math.round(audio.volume * 100)}%`;
+            } else {
+                volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+                statusText.textContent = `Music: ${Math.round(audio.volume * 100)}%`;
             }
-        });
-        
-        // Show volume percentage on slider hover/move
-        volumeSlider.addEventListener('mousemove', function(e) {
-            const rect = this.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const percentage = Math.round((x / rect.width) * 100);
-            volumePercentage.textContent = `${percentage}%`;
         });
         
         // GIF Action Buttons
@@ -1221,14 +1141,6 @@
                     }
                 }
             });
-        });
-        
-        // Close volume slider when clicking outside
-        document.addEventListener('click', function(event) {
-            if (!volumeBtn.contains(event.target) && !volumeSlider.contains(event.target)) {
-                volumeSlider.classList.remove('show');
-                volumeVisible = false;
-            }
         });
         
         // Intersection Observer for animations
@@ -1304,6 +1216,14 @@
                 const gifImg = this.querySelector('.gif-img');
                 gifImg.style.transform = 'scale(1)';
             });
+        });
+        
+        // Close volume slider when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!volumeBtn.contains(event.target) && !volumeSlider.contains(event.target)) {
+                volumeSlider.classList.remove('show');
+                volumeVisible = false;
+            }
         });
         
         // Auto-hide toast after scroll
