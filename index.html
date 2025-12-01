@@ -1,7 +1,634 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emloxa | GIF Artist & Animator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6C63FF;
+            --secondary: #FF6584;
+            --dark: #1A1A2E;
+            --light: #F5F5F7;
+            --gray: #8A8AA3;
+            --gradient: linear-gradient(135deg, #6C63FF 0%, #FF6584 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(108, 99, 255, 0.2);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+        
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 20%, rgba(108, 99, 255, 0.15) 0%, transparent 50%);
+            z-index: -1;
+        }
+        
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid transparent;
+            background: var(--gradient) border-box;
+            box-shadow: 0 20px 40px rgba(108, 99, 255, 0.3);
+            margin-bottom: 30px;
+        }
+        
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            margin-bottom: 15px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--gradient);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(108, 99, 255, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(108, 99, 255, 0.4);
+        }
+        
+        /* Sections */
+        section {
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+        
+        /* GIF Portfolio */
+        .gif-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .gif-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(108, 99, 255, 0.1);
+        }
+        
+        .gif-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(108, 99, 255, 0.2);
+        }
+        
+        .gif-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .gif-info {
+            padding: 20px;
+        }
+        
+        .gif-title {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: white;
+        }
+        
+        .gif-desc {
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .about-text h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            color: var(--gray);
+        }
+        
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .skill {
+            background: rgba(108, 99, 255, 0.1);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            border: 1px solid rgba(108, 99, 255, 0.3);
+        }
+        
+        .experience {
+            background: rgba(255, 101, 132, 0.1);
+            padding: 25px;
+            border-radius: 20px;
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .exp-item {
+            margin-bottom: 25px;
+        }
+        
+        .exp-item h4 {
+            color: white;
+            margin-bottom: 8px;
+        }
+        
+        .exp-date {
+            color: var(--secondary);
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        /* Contact */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .contact-item {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            background: rgba(108, 99, 255, 0.1);
+        }
+        
+        .contact-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid rgba(108, 99, 255, 0.2);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--gradient);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .gif-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            section {
+                padding: 70px 0;
+            }
+        }
+    </style>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">EMLOXA</a>
+                <div class="nav-links">
+                    <a href="#home">Home</a>
+                    <a href="#portfolio">Portfolio</a>
+                    <a href="#about">About</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <img src="https://media.giphy.com/avatars/Emloxa/gQngaIiqFIor/200h.jpg" alt="Emloxa" class="profile-img">
+            <h1>Emloxa</h1>
+            <p>GIF Artist & Digital Animator | Creating expressive animations for social media and digital platforms</p>
+            <a href="#portfolio" class="btn">View My Work</a>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <div class="container">
+            <h2 class="section-title">GIF Portfolio</h2>
+            <div class="gif-grid">
+                <!-- GIF 1 -->
+                <div class="gif-card">
+                    <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExMXN6Njg5ZmRrMTlqcWVlZXg1ODg2d3k0emhzenh2aDc2Znhvejd3YiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/EPHRc4ZH0555B1dI0z/giphy.gif" alt="Battal" class="gif-img">
+                    <div class="gif-info">
+                        <h3 class="gif-title">Battal</h3>
+                        <p class="gif-desc">An expressive character animation with dynamic movement and vibrant colors. Perfect for reaction content.</p>
+                    </div>
+                </div>
+                
+                <!-- GIF 2 -->
+                <div class="gif-card">
+                    <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNm9zb3ZnZ3o2MmhmMXh2OXEwamd0YzltOHNzcGVuODhtN2tlbjlwZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Z8UMGdRpFOP4oeuk6h/giphy.gif" alt="Rr Mutsuz" class="gif-img">
+                    <div class="gif-info">
+                        <h3 class="gif-title">Rr Mutsuz</h3>
+                        <p class="gif-desc">A melancholic character animation capturing subtle emotions. Used in storytelling and emotional content.</p>
+                    </div>
+                </div>
+                
+                <!-- GIF 3 -->
+                <div class="gif-card">
+                    <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjA4OHc1Zjh6am83MWo3Y2c1cjIzeTZwdnR5cnFwZHA0bjUzN3UxdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/UIw3YY0wPV8Vll4R6i/giphy.gif" alt="Disco Kid" class="gif-img">
+                    <div class="gif-info">
+                        <h3 class="gif-title">Disco Kid</h3>
+                        <p class="gif-desc">Energetic dance animation with retro disco vibes. Popular in music and entertainment communities.</p>
+                    </div>
+                </div>
+                
+                <!-- GIF 4 -->
+                <div class="gif-card">
+                    <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNTNjcjZ3NmZ5eWVnbHhpMjc3OHIwbm9xd3Jkc3N0dmUyZG14a3NoZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SP40ggFNiqNFl6iB8O/giphy.gif" alt="OG Roblox" class="gif-img">
+                    <div class="gif-info">
+                        <h3 class="gif-title">OG Roblox</h3>
+                        <p class="gif-desc">Nostalgic Roblox character animation. Celebrates gaming culture with authentic avatar movements.</p>
+                    </div>
+                </div>
+                
+                <!-- GIF 5 -->
+                <div class="gif-card">
+                    <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExendoYjZsYmN3dmJhdXh1dnVjdHB2aTd3MDZtbHdjNmFzczZsdGRmcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/FOjd5OwhVKlAMgPGcY/giphy.gif" alt="Rr Şaşırma" class="gif-img">
+                    <div class="gif-info">
+                        <h3 class="gif-title">Rr Şaşırma</h3>
+                        <p class="gif-desc">Reaction animation perfect for surprised or shocked moments. Widely used in meme culture.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Hello, I'm Muhammed Emrullah</h3>
+                    <p>Professionally known as <strong>Emloxa</strong>, I'm a digital animator specializing in GIF creation for social media platforms. With a passion for bringing characters to life through motion, I create expressive animations that resonate with online communities.</p>
+                    <p>My journey began 3 years ago when I discovered the power of animated GIFs in digital communication. Since then, I've been dedicated to mastering the art of short-form animation, focusing on emotional expression and character personality.</p>
+                    
+                    <div class="skills">
+                        <span class="skill">Adobe After Effects</span>
+                        <span class="skill">Photoshop</span>
+                        <span class="skill">Character Animation</span>
+                        <span class="skill">Motion Graphics</span>
+                        <span class="skill">Social Media Optimization</span>
+                        <span class="skill">Digital Storytelling</span>
+                    </div>
+                </div>
+                
+                <div class="experience">
+                    <h3>Experience & Background</h3>
+                    <div class="exp-item">
+                        <h4>Freelance GIF Artist</h4>
+                        <div class="exp-date">2021 - Present</div>
+                        <p>Creating custom animations for social media influencers and digital content creators.</p>
+                    </div>
+                    
+                    <div class="exp-item">
+                        <h4>Digital Animation Workshops</h4>
+                        <div class="exp-date">2022 - 2023</div>
+                        <p>Conducted online workshops teaching animation basics to aspiring digital artists.</p>
+                    </div>
+                    
+                    <div class="exp-item">
+                        <h4>Community Moderator</h4>
+                        <div class="exp-date">2020 - 2022</div>
+                        <p>Managed creative communities on Discord and Reddit, fostering animation talent.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email</h3>
+                    <p>contact@emloxa.com</p>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Location</h3>
+                    <p>Digital Nomad</p>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Availability</h3>
+                    <p>Freelance Projects</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <a href="#" class="logo">EMLOXA</a>
+            <p>Bringing digital characters to life through animation</p>
+            
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+            
+            <p class="copyright">&copy; 2024 Emloxa. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if(window.innerWidth <= 768) {
+                        document.querySelector('.nav-links').style.display = 'none';
+                    }
+                }
+            });
+        });
+        
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe elements for animation
+        document.querySelectorAll('.gif-card, .about-text, .experience').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+        
+        // Add hover effect to GIF cards
+        document.querySelectorAll('.gif-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                const gifImg = this.querySelector('.gif-img');
+                gifImg.style.transform = 'scale(1.05)';
+                gifImg.style.transition = 'transform 0.3s ease';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                const gifImg = this.querySelector('.gif-img');
+                gifImg.style.transform = 'scale(1)';
+            });
+        });
+    </script>
 </body>
 </html>
