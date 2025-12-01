@@ -361,6 +361,44 @@
         .gif-desc {
             color: var(--gray);
             font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .gif-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .gif-action-btn {
+            flex: 1;
+            background: rgba(108, 99, 255, 0.1);
+            border: 1px solid rgba(108, 99, 255, 0.3);
+            color: var(--light);
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .gif-action-btn:hover {
+            background: rgba(108, 99, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .gif-action-btn.copy {
+            background: rgba(255, 101, 132, 0.1);
+            border-color: rgba(255, 101, 132, 0.3);
+        }
+        
+        .gif-action-btn.copy:hover {
+            background: rgba(255, 101, 132, 0.2);
         }
         
         /* About Section */
@@ -540,6 +578,33 @@
             margin-top: 20px;
         }
         
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 70px;
+            right: 20px;
+            background: rgba(26, 26, 46, 0.95);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 14px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-left: 4px solid var(--primary);
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+        }
+        
+        .toast.show {
+            transform: translateX(0);
+        }
+        
+        .toast i {
+            color: var(--primary);
+        }
+        
         /* Responsive */
         @media (max-width: 768px) {
             .nav-links {
@@ -598,6 +663,17 @@
                 font-size: 11px;
                 padding: 6px 12px;
             }
+            
+            .gif-actions {
+                flex-direction: column;
+            }
+            
+            .toast {
+                bottom: 60px;
+                right: 10px;
+                left: 10px;
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -607,6 +683,12 @@
         <source src="ses.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastText">Link copied to clipboard!</span>
+    </div>
 
     <!-- Music Status Indicator -->
     <div class="music-status" id="musicStatus">
@@ -665,6 +747,14 @@
                     <div class="gif-info">
                         <h3 class="gif-title">Battal</h3>
                         <p class="gif-desc">An expressive Cat animation with dynamic movement and vibrant colors. Perfect for reaction content.</p>
+                        <div class="gif-actions">
+                            <button class="gif-action-btn copy" data-url="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExMXN6Njg5ZmRrMTlqcWVlZXg1ODg2d3k0emhzenh2aDc2Znhvejd3YiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/EPHRc4ZH0555B1dI0z/giphy.gif">
+                                <i class="far fa-copy"></i> Copy Link
+                            </button>
+                            <button class="gif-action-btn open" data-url="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExMXN6Njg5ZmRrMTlqcWVlZXg1ODg2d3k0emhzenh2aDc2Znhvejd3YiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/EPHRc4ZH0555B1dI0z/giphy.gif">
+                                <i class="fas fa-external-link-alt"></i> Open GIF
+                            </button>
+                        </div>
                     </div>
                 </div>
                 
@@ -674,6 +764,14 @@
                     <div class="gif-info">
                         <h3 class="gif-title">Rr Unhappy</h3>
                         <p class="gif-desc">A melancholic character animation capturing subtle emotions. Used in storytelling and emotional content.</p>
+                        <div class="gif-actions">
+                            <button class="gif-action-btn copy" data-url="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNm9zb3ZnZ3o2MmhmMXh2OXEwamd0YzltOHNzcGVuODhtN2tlbjlwZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Z8UMGdRpFOP4oeuk6h/giphy.gif">
+                                <i class="far fa-copy"></i> Copy Link
+                            </button>
+                            <button class="gif-action-btn open" data-url="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNm9zb3ZnZ3o2MmhmMXh2OXEwamd0YzltOHNzcGVuODhtN2tlbjlwZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Z8UMGdRpFOP4oeuk6h/giphy.gif">
+                                <i class="fas fa-external-link-alt"></i> Open GIF
+                            </button>
+                        </div>
                     </div>
                 </div>
                 
@@ -683,6 +781,14 @@
                     <div class="gif-info">
                         <h3 class="gif-title">Disco Kid</h3>
                         <p class="gif-desc">Energetic dance animation with retro disco vibes. Popular in music and entertainment communities.</p>
+                        <div class="gif-actions">
+                            <button class="gif-action-btn copy" data-url="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjA4OHc1Zjh6am83MWo3Y2c1cjIzeTZwdnR5cnFwZHA0bjUzN3UxdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/UIw3YY0wPV8Vll4R6i/giphy.gif">
+                                <i class="far fa-copy"></i> Copy Link
+                            </button>
+                            <button class="gif-action-btn open" data-url="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjA4OHc1Zjh6am83MWo3Y2c1cjIzeTZwdnR5cnFwZHA0bjUzN3UxdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/UIw3YY0wPV8Vll4R6i/giphy.gif">
+                                <i class="fas fa-external-link-alt"></i> Open GIF
+                            </button>
+                        </div>
                     </div>
                 </div>
                 
@@ -692,6 +798,14 @@
                     <div class="gif-info">
                         <h3 class="gif-title">OG Roblox</h3>
                         <p class="gif-desc">Nostalgic Roblox character animation. Celebrates gaming culture with authentic avatar movements.</p>
+                        <div class="gif-actions">
+                            <button class="gif-action-btn copy" data-url="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNTNjcjZ3NmZ5eWVnbHhpMjc3OHIwbm9xd3Jkc3N0dmUyZG14a3NoZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SP40ggFNiqNFl6iB8O/giphy.gif">
+                                <i class="far fa-copy"></i> Copy Link
+                            </button>
+                            <button class="gif-action-btn open" data-url="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNTNjcjZ3NmZ5eWVnbHhpMjc3OHIwbm9xd3Jkc3N0dmUyZG14a3NoZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SP40ggFNiqNFl6iB8O/giphy.gif">
+                                <i class="fas fa-external-link-alt"></i> Open GIF
+                            </button>
+                        </div>
                     </div>
                 </div>
                 
@@ -701,33 +815,65 @@
                     <div class="gif-info">
                         <h3 class="gif-title">Rr Shocked</h3>
                         <p class="gif-desc">Reaction animation perfect for surprised or shocked moments. Widely used in meme culture.</p>
+                        <div class="gif-actions">
+                            <button class="gif-action-btn copy" data-url="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExendoYjZsYmN3dmJhdXh1dnVjdHB2aITd3MDZtbHdjNmFzczZsdGRmcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/FOjd5OwhVKlAMgPGcY/giphy.gif">
+                                <i class="far fa-copy"></i> Copy Link
+                            </button>
+                            <button class="gif-action-btn open" data-url="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExendoYjZsYmN3dmJhdXh1dnVjdHB2aITd3MDZtbHdjNmFzczZsdGRmcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/FOjd5OwhVKlAMgPGcY/giphy.gif">
+                                <i class="fas fa-external-link-alt"></i> Open GIF
+                            </button>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- NEW GIF 6 -->
+                <!-- GIF 6 -->
                 <div class="gif-card">
                     <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmF4b2hzZ21iYXFmb3MxdjB3Z3NvOWFwbnRtczBrY2hoaGNocDdycSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/OpL4mNa6ZrWrGcIpLy/giphy.gif" alt="Angry Miku" class="gif-img">
                     <div class="gif-info">
                         <h3 class="gif-title">Angry Miku</h3>
                         <p class="gif-desc">Vocaloid character Miku in an angry expression. Perfect for anime and music community reactions.</p>
+                        <div class="gif-actions">
+                            <button class="gif-action-btn copy" data-url="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmF4b2hzZ21iYXFmb3MxdjB3Z3NvOWFwbnRtczBrY2hoaGNocDdycSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/OpL4mNa6ZrWrGcIpLy/giphy.gif">
+                                <i class="far fa-copy"></i> Copy Link
+                            </button>
+                            <button class="gif-action-btn open" data-url="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmF4b2hzZ21iYXFmb3MxdjB3Z3NvOWFwbnRtczBrY2hoaGNocDdycSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/OpL4mNa6ZrWrGcIpLy/giphy.gif">
+                                <i class="fas fa-external-link-alt"></i> Open GIF
+                            </button>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- NEW GIF 7 -->
+                <!-- GIF 7 -->
                 <div class="gif-card">
                     <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExc2s3ZXV6MXg2ZXJoeXVzbDBlMzk3anhtOTNpMDl1NWFoYW1lbGFtayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/oyAXfuLM41i49vX38H/giphy.gif" alt="Enes Batur" class="gif-img">
                     <div class="gif-info">
                         <h3 class="gif-title">Enes Batur</h3>
                         <p class="gif-desc">Popular Turkish YouTuber reaction GIF. Widely used in Turkish social media communities.</p>
+                        <div class="gif-actions">
+                            <button class="gif-action-btn copy" data-url="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExc2s3ZXV6MXg2ZXJoeXVzbDBlMzk3anhtOTNpMDl1NWFoYW1lbGFtayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/oyAXfuLM41i49vX38H/giphy.gif">
+                                <i class="far fa-copy"></i> Copy Link
+                            </button>
+                            <button class="gif-action-btn open" data-url="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExc2s3ZXV6MXg2ZXJoeXVzbDBlMzk3anhtOTNpMDl1NWFoYW1lbGFtayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/oyAXfuLM41i49vX38H/giphy.gif">
+                                <i class="fas fa-external-link-alt"></i> Open GIF
+                            </button>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- NEW GIF 8 -->
+                <!-- GIF 8 -->
                 <div class="gif-card">
                     <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjJidmszZDgzaGVjcHgwZmhidWJsaDU3ZGpnZzQ1YXB1ZWc9ZWR3NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/pH4ipGn9TZAuEZTv0q/giphy.gif" alt="Angry Goku" class="gif-img">
                     <div class="gif-info">
                         <h3 class="gif-title">Angry Goku</h3>
                         <p class="gif-desc">Dragon Ball's Goku in super saiyan angry mode. Perfect for gaming and anime reaction moments.</p>
+                        <div class="gif-actions">
+                            <button class="gif-action-btn copy" data-url="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjJidmszZDgzaGVjcHgwZmhidWJsaDU7ZGpnZzQ1YXB1ZWc9ZWR3NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/pH4ipGn9TZAuEZTv0q/giphy.gif">
+                                <i class="far fa-copy"></i> Copy Link
+                            </button>
+                            <button class="gif-action-btn open" data-url="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjJidmszZDgzaGVjcHgwZmhidWJsaDU7ZGpnZzQ1YXB1ZWc9ZWR3NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/pH4ipGn9TZAuEZTv0q/giphy.gif">
+                                <i class="fas fa-external-link-alt"></i> Open GIF
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -844,6 +990,8 @@
         const musicStatus = document.getElementById('musicStatus');
         const statusText = document.getElementById('statusText');
         const currentYearSpan = document.getElementById('currentYear');
+        const toast = document.getElementById('toast');
+        const toastText = document.getElementById('toastText');
         
         // Set initial volume to 30%
         audio.volume = 0.3;
@@ -852,27 +1000,46 @@
         // Set current year
         currentYearSpan.textContent = new Date().getFullYear();
         
-        // Initialize music on page load
+        // Initialize music on page load - AUTOPLAY ENABLED
         document.addEventListener('DOMContentLoaded', function() {
-            // Start music automatically at 30% volume
-            audio.play().then(() => {
-                console.log("Music started automatically at 30% volume");
-                statusText.textContent = "Music: 30%";
-                
-                // Update play button to pause state
-                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                playBtn.classList.add('active');
-                
-                // Update volume button icon
-                volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
-                volumeBtn.classList.add('active');
-            }).catch(e => {
-                console.log("Autoplay prevented. User interaction required.");
-                statusText.textContent = "Click play button";
-                playBtn.innerHTML = '<i class="fas fa-play"></i>';
-                playBtn.classList.remove('active');
-            });
+            // Try to play music automatically at 30% volume
+            const playPromise = audio.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    console.log("Music started automatically at 30% volume");
+                    statusText.textContent = "Music: 30%";
+                    
+                    // Update play button to pause state
+                    playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    playBtn.classList.add('active');
+                    
+                    // Update volume button icon
+                    volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+                    volumeBtn.classList.add('active');
+                }).catch(error => {
+                    console.log("Autoplay prevented:", error);
+                    statusText.textContent = "Click play button";
+                    playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                    playBtn.classList.remove('active');
+                    
+                    // Show instruction to user
+                    setTimeout(() => {
+                        showToast("Click play button to start music");
+                    }, 1000);
+                });
+            }
         });
+        
+        // Show toast notification
+        function showToast(message) {
+            toastText.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
         
         // Play/Pause button
         playBtn.addEventListener('click', function() {
@@ -881,11 +1048,13 @@
                 playBtn.innerHTML = '<i class="fas fa-pause"></i>';
                 playBtn.classList.add('active');
                 statusText.textContent = `Music: ${Math.round(audio.volume * 100)}%`;
+                showToast("Music started");
             } else {
                 audio.pause();
                 playBtn.innerHTML = '<i class="fas fa-play"></i>';
                 playBtn.classList.remove('active');
                 statusText.textContent = "Music: Paused";
+                showToast("Music paused");
             }
         });
         
@@ -916,6 +1085,33 @@
                 volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
                 statusText.textContent = `Music: ${Math.round(audio.volume * 100)}%`;
             }
+        });
+        
+        // GIF Action Buttons
+        document.querySelectorAll('.gif-action-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const url = this.getAttribute('data-url');
+                
+                if (this.classList.contains('copy')) {
+                    // Copy to clipboard
+                    navigator.clipboard.writeText(url).then(() => {
+                        showToast("GIF link copied to clipboard!");
+                    }).catch(err => {
+                        console.error('Failed to copy: ', err);
+                        // Fallback method
+                        const textArea = document.createElement('textarea');
+                        textArea.value = url;
+                        document.body.appendChild(textArea);
+                        textArea.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(textArea);
+                        showToast("Link copied!");
+                    });
+                } else if (this.classList.contains('open')) {
+                    // Open in new tab
+                    window.open(url, '_blank');
+                }
+            });
         });
         
         // Mobile Menu Toggle
@@ -1028,6 +1224,17 @@
                 volumeSlider.classList.remove('show');
                 volumeVisible = false;
             }
+        });
+        
+        // Auto-hide toast after scroll
+        let scrollTimer;
+        window.addEventListener('scroll', function() {
+            toast.classList.remove('show');
+            
+            clearTimeout(scrollTimer);
+            scrollTimer = setTimeout(() => {
+                // You can add any scroll-based behavior here
+            }, 100);
         });
     </script>
 </body>
